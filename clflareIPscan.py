@@ -77,16 +77,17 @@ class cdnscanner:
 
 		
 def parseargs():
-		parser = argparse.ArgumentParser(
-			formatter_class=lambda prog: argparse.HelpFormatter(prog, max_help_position=52))
-		parser.add_argument('-t','--threads',help='num of threads',dest='threads',type=int,default=10)
-		parser.add_argument('-p','--port',help='port to scan',dest='port',type=int,default=80)
-		parser.add_argument('-P','--proxy',help='proxy ip:port ex: 12.34.56.6:80',dest='proxy',type=str)
-		parser.add_argument('-o','--output',help='save output in file',dest='output',type=str)
-	
-		args = parser.parse_args()		
-		if args.help:
-			parser.print_help()
+    parser = argparse.ArgumentParser(formatter_class=lambda prog: argparse.HelpFormatter(prog, max_help_position=52))
+    parser.add_argument('-t','--threads',help='num of threads',dest='threads',type=int,default=10)
+    parser.add_argument('-p','--port',help='port to scan',dest='port',type=int,default=80)
+    parser.add_argument('-P','--proxy',help='proxy ip:port ex: 12.34.56.6:80',dest='proxy',type=str)
+    parser.add_argument('-o','--output',help='save output in file',dest='output',type=str)
+
+    args = parser.parse_args()     
+    if args.threads is None and args.port is None and args.proxy is None and args.output is None:
+        parser.print_help()
+    else:
+        return args
 			
 			return
 		cdnscan=cdnscanner()
